@@ -303,7 +303,7 @@ public class Generator : Singleton<Generator>
                 tiles[(int)randomPosition.x][(int)randomPosition.y] = TileType.SellerShield;
             else if (otherObjectsType[i] == 7)
                 tiles[(int)randomPosition.x][(int)randomPosition.y] = TileType.SellerFood;
-            tiles[(int)randomPosition.x][(int)randomPosition.y] = TileType.Buyer;
+
             GameObject tileChoice = tileArray[otherObjectsType[i]];
             otherObjects[i] = Instantiate(tileChoice, randomPosition, Quaternion.identity) as GameObject;
             otherObjects[i].transform.parent = transform;
@@ -340,8 +340,8 @@ public class Generator : Singleton<Generator>
             tiles[Mathf.RoundToInt(enemies[i].transform.position.x)][Mathf.RoundToInt(enemies[i].transform.position.y)] = TileType.Enemy;
 
             Invtr[i] = Instantiate(Inventory, transform.position, Quaternion.identity) as GameObject;
-            Invtr[i].transform.SetParent(GameObject.Find("EnemyInventories").transform, false);
-            Invtr[i].transform.position = GameObject.Find("EnemyInventories").transform.position;
+            Invtr[i].transform.SetParent(GameObject.Find("EnemyInvtrs").transform, false);
+            Invtr[i].transform.position = GameObject.Find("EnemyInvtrs").transform.position;
             
             InventoryEnemy invtrEnemy = Invtr[i].GetComponentInChildren<InventoryEnemy>();
 
@@ -503,8 +503,8 @@ public class Generator : Singleton<Generator>
             tiles[0][0] = TileType.Object; 
 
             InvtrContainers[i] = Instantiate(Inventory, transform.position, Quaternion.identity) as GameObject;
-            InvtrContainers[i].transform.SetParent(GameObject.Find("ContainersInventories").transform, false);
-            InvtrContainers[i].transform.position = GameObject.Find("ContainersInventories").transform.position;
+            InvtrContainers[i].transform.SetParent(GameObject.Find("CntnersInvtrs").transform, false);
+            InvtrContainers[i].transform.position = GameObject.Find("CntnersInvtrs").transform.position;
             
             InventoryEnemy InventoryContainers = InvtrContainers[i].GetComponentInChildren<InventoryEnemy>();
             
@@ -526,8 +526,8 @@ public class Generator : Singleton<Generator>
             tiles[0][0] = TileType.Enemy;
 
             Invtr[i] = Instantiate(Inventory, transform.position, Quaternion.identity) as GameObject;
-            Invtr[i].transform.SetParent(GameObject.Find("EnemyInventories").transform, false);
-            Invtr[i].transform.position = GameObject.Find("EnemyInventories").transform.position;
+            Invtr[i].transform.SetParent(GameObject.Find("EnemyInvtrs").transform, false);
+            Invtr[i].transform.position = GameObject.Find("EnemyInvtrs").transform.position;
             
             InventoryEnemy invtrEnemy = Invtr[i].GetComponentInChildren<InventoryEnemy>();
 
