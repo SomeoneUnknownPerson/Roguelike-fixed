@@ -1,40 +1,23 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using Rogue;
 
 public class Buy : Singleton<Buy>
 {
-    public Camera cam;
-
     public int maxCount;
     public int currentID;
-
-    public Vector3 offset;
 
     public EventSystem es;
 
     public GameObject gameObjShow;
     public GameObject InventoryMainObject;
 
-    public ItemInventory currentItem;
-
-    public RectTransform movingObject;
-
     public List<ItemInventory> items = new List<ItemInventory>();
 
-    public AudioClip takeSound;
     public AudioClip goldSound;
     public AudioClip cancelSound;
-
-    private bool isAdded;
-
-    public void Start()
-    {
-
-    }
 
     public void DeleteAllItems()
     {
@@ -118,15 +101,10 @@ public class Buy : Singleton<Buy>
                 AudioManager.Instance.PlayEffects(goldSound);
             }
 
-
             if (items[currentID].count == 0)
-            {
-                Debug.Log("d");
                 AddItem(currentID, DataBase.Instance.items[0], 0, DataBase.Instance.items[0].type);
-            }
 
             currentID = -1;
-            isAdded = false;
             UpdateInventory();
             Inventory.Instance.UpdateInventory();
         }
@@ -187,15 +165,37 @@ public class Buy : Singleton<Buy>
         }
     }
 
-    public void LoadData(Save.EnemyInventorySaveData save, int k)
+    public void Initialize()
     {
-        AddItem(k, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
+        AddItem(0, DataBase.Instance.items[Inventory.Instance.items[5].id], Inventory.Instance.items[5].count, Inventory.Instance.items[5].type);
+        AddItem(1, DataBase.Instance.items[Inventory.Instance.items[6].id], Inventory.Instance.items[6].count, Inventory.Instance.items[6].type);
+        AddItem(2, DataBase.Instance.items[Inventory.Instance.items[7].id], Inventory.Instance.items[7].count, Inventory.Instance.items[7].type);
+        AddItem(3, DataBase.Instance.items[Inventory.Instance.items[8].id], Inventory.Instance.items[8].count, Inventory.Instance.items[8].type);
+        AddItem(4, DataBase.Instance.items[Inventory.Instance.items[9].id], Inventory.Instance.items[9].count, Inventory.Instance.items[9].type);
+        AddItem(5, DataBase.Instance.items[Inventory.Instance.items[10].id], Inventory.Instance.items[10].count, Inventory.Instance.items[10].type);
+        AddItem(6, DataBase.Instance.items[Inventory.Instance.items[11].id], Inventory.Instance.items[11].count, Inventory.Instance.items[11].type);
+        AddItem(7, DataBase.Instance.items[Inventory.Instance.items[12].id], Inventory.Instance.items[12].count, Inventory.Instance.items[12].type);
+        AddItem(8, DataBase.Instance.items[Inventory.Instance.items[13].id], Inventory.Instance.items[13].count, Inventory.Instance.items[13].type);
+        AddItem(9, DataBase.Instance.items[Inventory.Instance.items[14].id], Inventory.Instance.items[14].count, Inventory.Instance.items[14].type);
+        AddItem(10, DataBase.Instance.items[Inventory.Instance.items[15].id], Inventory.Instance.items[15].count, Inventory.Instance.items[15].type);
+        AddItem(11, DataBase.Instance.items[Inventory.Instance.items[16].id], Inventory.Instance.items[16].count, Inventory.Instance.items[16].type);
+        AddItem(12, DataBase.Instance.items[Inventory.Instance.items[17].id], Inventory.Instance.items[17].count, Inventory.Instance.items[17].type);
+        AddItem(13, DataBase.Instance.items[Inventory.Instance.items[18].id], Inventory.Instance.items[18].count, Inventory.Instance.items[18].type);
+        AddItem(14, DataBase.Instance.items[Inventory.Instance.items[19].id], Inventory.Instance.items[19].count, Inventory.Instance.items[19].type);
+        AddItem(15, DataBase.Instance.items[Inventory.Instance.items[20].id], Inventory.Instance.items[20].count, Inventory.Instance.items[20].type);
+        AddItem(16, DataBase.Instance.items[Inventory.Instance.items[21].id], Inventory.Instance.items[21].count, Inventory.Instance.items[21].type);
+        AddItem(17, DataBase.Instance.items[Inventory.Instance.items[22].id], Inventory.Instance.items[22].count, Inventory.Instance.items[22].type);
+        AddItem(18, DataBase.Instance.items[Inventory.Instance.items[23].id], Inventory.Instance.items[23].count, Inventory.Instance.items[23].type);
+        AddItem(19, DataBase.Instance.items[Inventory.Instance.items[24].id], Inventory.Instance.items[24].count, Inventory.Instance.items[24].type);
     }
 
-    public void LoadDataContainers(Save.ContainersInventorySaveData save, int k)
+    public void LoadData(Save.EnemyInventorySaveData save, int i)
     {
-        AddItem(k, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
+        AddItem(i, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
+    }
+
+    public void LoadDataContainers(Save.ContainersInventorySaveData save, int i)
+    {
+        AddItem(i, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
     }
 }
-
-

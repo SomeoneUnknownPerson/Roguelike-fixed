@@ -1,10 +1,9 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 using System.IO;
-using UnityEngine.UI;
 using Rogue;
 
 public class SaveLoadManager : Singleton<SaveLoadManager>
@@ -23,6 +22,11 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         musicSlider.GetComponent<Sliders>().setSettings();
         effectsSlider.GetComponent<Sliders>().setSettings();
     }
+
+	private void Update()
+	{
+		
+	}
 
     public void SaveGame()
     {

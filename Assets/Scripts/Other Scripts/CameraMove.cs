@@ -1,19 +1,21 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using Rogue;
 
-public class CameraMove : Singleton<CameraMove>
+public class CameraMove : MonoBehaviour
 {
     private bool drag = false;
     private bool zoom = false;
     private float timer = 0;
     private float _timer = 0;
+
     private Vector3 initialTouchPosition;
     private Vector3 initialCameraPosition;
     private Vector3 initialTouch0Position;
     private Vector3 initialTouch1Position;
     private Vector3 initialMidPointScreen;
     private float initialOrthographicSize;
+
     private Camera cam;
 
     private void Start()
@@ -106,14 +108,14 @@ public class CameraMove : Singleton<CameraMove>
     }
 	}
 
-    static bool IsTouching(Touch touch)
+    private static bool IsTouching(Touch touch)
     {
         return touch.phase == TouchPhase.Began ||
                touch.phase == TouchPhase.Moved ||
                touch.phase == TouchPhase.Stationary;
     }
 
-    public static float GetScaleFactor(Vector2 position1, Vector2 position2, Vector2 oldPosition1, Vector2 oldPosition2)
+    private static float GetScaleFactor(Vector2 position1, Vector2 position2, Vector2 oldPosition1, Vector2 oldPosition2)
     {
         float distance = Vector2.Distance(position1, position2);
         float oldDistance = Vector2.Distance(oldPosition1, oldPosition2);

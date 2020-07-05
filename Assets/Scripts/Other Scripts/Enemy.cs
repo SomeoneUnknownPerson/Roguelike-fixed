@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public int expCount;
 
 	public GameObject enemy;
-    public GameObject drop;
 
 	public bool isStep;
     public bool isSleep;

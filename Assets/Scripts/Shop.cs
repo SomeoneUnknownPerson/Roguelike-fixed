@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using Rogue;
@@ -205,6 +204,65 @@ public class Shop : Singleton<Shop>
         }
     }
 
+    public void InitializePotion()
+    {
+        AddItem(0, DataBase.Instance.items[14], 1, DataBase.Instance.items[14].type);
+        AddItem(1, DataBase.Instance.items[15], 1, DataBase.Instance.items[15].type);
+        AddItem(2, DataBase.Instance.items[16], 1, DataBase.Instance.items[16].type);
+        AddItem(3, DataBase.Instance.items[17], 1, DataBase.Instance.items[17].type);
+        AddItem(4, DataBase.Instance.items[24], 1, DataBase.Instance.items[24].type);
+        AddItem(5, DataBase.Instance.items[25], 1, DataBase.Instance.items[25].type);
+        AddItem(6, DataBase.Instance.items[26], 1, DataBase.Instance.items[26].type);
+    }
+
+    public void InitializeArmor()
+    {
+        AddItem(0, DataBase.Instance.items[18], 1, DataBase.Instance.items[18].type);
+        AddItem(1, DataBase.Instance.items[19], 1, DataBase.Instance.items[19].type);
+        AddItem(2, DataBase.Instance.items[20], 1, DataBase.Instance.items[20].type);
+        AddItem(3, DataBase.Instance.items[21], 1, DataBase.Instance.items[21].type);
+        AddItem(4, DataBase.Instance.items[22], 1, DataBase.Instance.items[22].type);
+        AddItem(5, DataBase.Instance.items[37], 1, DataBase.Instance.items[37].type);
+        AddItem(6, DataBase.Instance.items[38], 1, DataBase.Instance.items[38].type);
+        AddItem(7, DataBase.Instance.items[39], 1, DataBase.Instance.items[39].type);
+        AddItem(8, DataBase.Instance.items[40], 1, DataBase.Instance.items[40].type);
+        AddItem(9, DataBase.Instance.items[41], 1, DataBase.Instance.items[41].type);
+    }
+
+    public void InitializeFood()
+    {
+        AddItem(0, DataBase.Instance.items[2], 1, DataBase.Instance.items[2].type);
+        AddItem(1, DataBase.Instance.items[3], 1, DataBase.Instance.items[3].type);
+    }
+
+    public void InitializeShield()
+    {
+        AddItem(0, DataBase.Instance.items[9], 1, DataBase.Instance.items[9].type);
+        AddItem(1, DataBase.Instance.items[10], 1, DataBase.Instance.items[10].type);
+        AddItem(2, DataBase.Instance.items[11], 1, DataBase.Instance.items[11].type);
+        AddItem(3, DataBase.Instance.items[12], 1, DataBase.Instance.items[12].type);
+        AddItem(4, DataBase.Instance.items[13], 1, DataBase.Instance.items[13].type);
+        AddItem(5, DataBase.Instance.items[32], 1, DataBase.Instance.items[32].type);
+        AddItem(6, DataBase.Instance.items[33], 1, DataBase.Instance.items[33].type);
+        AddItem(7, DataBase.Instance.items[34], 1, DataBase.Instance.items[34].type);
+        AddItem(8, DataBase.Instance.items[35], 1, DataBase.Instance.items[35].type);
+        AddItem(9, DataBase.Instance.items[36], 1, DataBase.Instance.items[36].type);
+    }
+
+    public void InitializeWeapon()
+    {
+        AddItem(0, DataBase.Instance.items[4], 1, DataBase.Instance.items[4].type);
+        AddItem(1, DataBase.Instance.items[5], 1, DataBase.Instance.items[5].type);
+        AddItem(2, DataBase.Instance.items[6], 1, DataBase.Instance.items[6].type);
+        AddItem(3, DataBase.Instance.items[7], 1, DataBase.Instance.items[7].type);
+        AddItem(4, DataBase.Instance.items[8], 1, DataBase.Instance.items[8].type);
+        AddItem(5, DataBase.Instance.items[27], 1, DataBase.Instance.items[27].type);
+        AddItem(6, DataBase.Instance.items[28], 1, DataBase.Instance.items[28].type);
+        AddItem(7, DataBase.Instance.items[29], 1, DataBase.Instance.items[29].type);
+        AddItem(8, DataBase.Instance.items[30], 1, DataBase.Instance.items[30].type);
+        AddItem(9, DataBase.Instance.items[31], 1, DataBase.Instance.items[31].type);
+    }
+    
     public void LoadData(Save.EnemyInventorySaveData save, int k)
     {
         AddItem(k, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);

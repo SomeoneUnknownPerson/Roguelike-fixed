@@ -1,27 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using Rogue; 
 
-public class InventoryEnemy : Singleton<DataBase>
+public class InventoryEnemy : MonoBehaviour
 {
-	public Camera cam;
-
     public int maxCount;
     public int currentID;
 
-    public Vector3 offset;
-
     public EventSystem es;
-
 	public GameObject gameObjShow;
     public GameObject InventoryMainObject;
-
-    public ItemInventory currentItem;
-
-	public RectTransform movingObject;
     
     public List<ItemInventory> items = new List<ItemInventory>();
 
@@ -211,14 +201,14 @@ public class InventoryEnemy : Singleton<DataBase>
         }
     }
 
-    public void LoadData(Save.EnemyInventorySaveData save, int k)
+    public void LoadData(Save.EnemyInventorySaveData save, int i)
     {
-        AddItem(k, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
+        AddItem(i, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
     }
 
-    public void LoadDataContainers(Save.ContainersInventorySaveData save, int k)
+    public void LoadDataContainers(Save.ContainersInventorySaveData save, int i)
     {
-        AddItem(k, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
+        AddItem(i, DataBase.Instance.items[save.id], save.count, DataBase.Instance.items[save.id].type);
     }
 }
 
@@ -230,5 +220,3 @@ public class ItemInventory
 	public int count;
     public DataBase.ItemType type;
 }
-
-

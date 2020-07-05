@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Rogue;
 
 public class AudioManager : Singleton<AudioManager>
@@ -7,12 +6,8 @@ public class AudioManager : Singleton<AudioManager>
     public GameObject effectsSource;
     public GameObject uiSource;                 
     public GameObject musicSource;   
-
-    private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
+    public bool isPlaying;
+    
     public void PlayEffects(AudioClip clip)
     { 
         GameObject sound = (GameObject)Instantiate(effectsSource);
@@ -44,6 +39,7 @@ public class AudioManager : Singleton<AudioManager>
         soundSource.clip = clip;
         soundSource.Play();
         soundSource.loop = true;
+        isPlaying = true;
     }
 
     public void PauseMusic()

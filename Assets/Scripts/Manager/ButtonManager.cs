@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 using Rogue;
 
 public class ButtonManager : Singleton<ButtonManager>
@@ -19,7 +17,7 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         SaveLoadManager.Instance.SaveGame();
     	SceneManager.LoadScene("MainMenu");
-    	AudioManager.Instance.RestoreMusic();
+        AudioManager.Instance.RestoreMusic();
     }
 
     public void SettingsButton()

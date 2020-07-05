@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine;
 using Rogue;
 
 public class GameManager : Singleton<GameManager>
@@ -37,12 +35,13 @@ public class GameManager : Singleton<GameManager>
 	public bool onPause = false;
 
 	private Animation TransitionAnim;
-    private Camera cam;
 
     private void Start()
 	{
 		Application.targetFrameRate = 60;
-		AudioManager.Instance.PlayMusic(BackgroundMusic);
+
+        if(!AudioManager.Instance.isPlaying)
+		    AudioManager.Instance.PlayMusic(BackgroundMusic);
 
 		healthCount.text = Player.Instance.currentLifes.ToString() + 
             "/" + Player.Instance.maxLifes.ToString();
@@ -64,7 +63,10 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         foreach (Transform child in HitParent.transform)
-            child.gameObject.transform.position = Vector2.MoveTowards(child.gameObject.transform.position, new Vector3(child.gameObject.transform.position.x, child.gameObject.transform.position.y + 1000, 0), gameSpeed * Time.deltaTime / 2);
+        {
+            child.gameObject.transform.position = Vector2.MoveTowards(child.gameObject.transform.position, 
+            new Vector3(child.gameObject.transform.position.x, child.gameObject.transform.position.y + 1000, 0), gameSpeed * Time.deltaTime / 2);
+        }
     }
 
 	public void NewLevelMessage()
@@ -104,7 +106,7 @@ public class GameManager : Singleton<GameManager>
         onPause = false;
 		Time.timeScale = 1;
 
-		TransitionAnim = GameObject.Find("Panel").GetComponent<Animation>();
+		TransitionAnim = GameObject.Find("DimmingPnl").GetComponent<Animation>();
 		TransitionAnim.Play("Transition");
 
         NextLevelPanel.SetActive(false);

@@ -1,9 +1,6 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.IO;
 using Rogue;
 
 public class Generator : Singleton<Generator>
@@ -58,7 +55,6 @@ public class Generator : Singleton<Generator>
 
     private Room[] rooms; 
     private Corridor[] corridors;
-    private Room EndingRoom;
 
     private List<Vector3> gridPositions = new List<Vector3>();
     public List<Vector3> enemyPositions = new List<Vector3>();
@@ -77,7 +73,6 @@ public class Generator : Singleton<Generator>
         addWalls();
         addInstance();
         addPositions();
-
         addObjectsOnMap(containersTiles, roomsCount, roomsCount + 2);
         addEnemyOnMap(enemyTiles, roomsCount - 7, roomsCount - 5);
         addOtherObjectsOnMap(otherObjectsTiles);
@@ -285,7 +280,6 @@ public class Generator : Singleton<Generator>
             int random = Random.Range(0, 100);
             if(random > 30)
                 otherObjectsType[i] = Random.Range(1, 3);
-
 
             if (otherObjectsType[i] == 0)
                 tiles[(int)randomPosition.x][(int)randomPosition.y] = TileType.SellerPotion;

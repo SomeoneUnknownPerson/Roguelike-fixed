@@ -1,7 +1,6 @@
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+Ôªøusing UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine;
 using Rogue;
 
 public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler 
@@ -65,9 +64,11 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             isMoving = true;
             (stepPoint.x, stepPoint.y) = FindWave((int)transform.position.x, (int)transform.position.y, (int)point.x, (int)point.y);
             ChangeSprite();
+
             if(Generator.Instance.tiles[(int)stepPoint.x][(int)stepPoint.y] == Generator.TileType.Floor ||
                 Generator.Instance.tiles[(int)stepPoint.x][(int)stepPoint.y] == Generator.TileType.CorridorFloor)
-                GiveStepEnemies();
+                if(stepPoint != transform.position)
+                    GiveStepEnemies();
         }    
     }
 
@@ -141,14 +142,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             shopPanel.SetActive(true);
 
             Shop.Instance.DeleteAllItems();
-            Shop.Instance.AddItem(0, DataBase.Instance.items[14], 1, DataBase.Instance.items[14].type);
-            Shop.Instance.AddItem(1, DataBase.Instance.items[15], 1, DataBase.Instance.items[15].type);
-            Shop.Instance.AddItem(2, DataBase.Instance.items[16], 1, DataBase.Instance.items[16].type);
-            Shop.Instance.AddItem(3, DataBase.Instance.items[17], 1, DataBase.Instance.items[17].type);
-            Shop.Instance.AddItem(4, DataBase.Instance.items[24], 1, DataBase.Instance.items[24].type);
-            Shop.Instance.AddItem(5, DataBase.Instance.items[25], 1, DataBase.Instance.items[25].type);
-            Shop.Instance.AddItem(6, DataBase.Instance.items[26], 1, DataBase.Instance.items[26].type);
-
+            Shop.Instance.InitializePotion();
             GameManager.Instance.PauseGame();
         }
 
@@ -159,16 +153,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             shopPanel.SetActive(true);
 
             Shop.Instance.DeleteAllItems();
-            Shop.Instance.AddItem(0, DataBase.Instance.items[18], 1, DataBase.Instance.items[18].type);
-            Shop.Instance.AddItem(1, DataBase.Instance.items[19], 1, DataBase.Instance.items[19].type);
-            Shop.Instance.AddItem(2, DataBase.Instance.items[20], 1, DataBase.Instance.items[20].type);
-            Shop.Instance.AddItem(3, DataBase.Instance.items[21], 1, DataBase.Instance.items[21].type);
-            Shop.Instance.AddItem(4, DataBase.Instance.items[22], 1, DataBase.Instance.items[22].type);
-            Shop.Instance.AddItem(5, DataBase.Instance.items[37], 1, DataBase.Instance.items[37].type);
-            Shop.Instance.AddItem(6, DataBase.Instance.items[38], 1, DataBase.Instance.items[38].type);
-            Shop.Instance.AddItem(7, DataBase.Instance.items[39], 1, DataBase.Instance.items[39].type);
-            Shop.Instance.AddItem(8, DataBase.Instance.items[40], 1, DataBase.Instance.items[40].type);
-            Shop.Instance.AddItem(9, DataBase.Instance.items[41], 1, DataBase.Instance.items[41].type);
+            Shop.Instance.InitializeArmor();
 
             GameManager.Instance.PauseGame();
         }
@@ -180,8 +165,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             shopPanel.SetActive(true);
 
             Shop.Instance.DeleteAllItems();
-            Shop.Instance.AddItem(0, DataBase.Instance.items[2], 1, DataBase.Instance.items[2].type);
-            Shop.Instance.AddItem(1, DataBase.Instance.items[3], 1, DataBase.Instance.items[3].type);
+            Shop.Instance.InitializeFood();
 
             GameManager.Instance.PauseGame();
         }
@@ -193,16 +177,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             shopPanel.SetActive(true);
 
             Shop.Instance.DeleteAllItems();
-            Shop.Instance.AddItem(0, DataBase.Instance.items[9], 1, DataBase.Instance.items[9].type);
-            Shop.Instance.AddItem(1, DataBase.Instance.items[10], 1, DataBase.Instance.items[10].type);
-            Shop.Instance.AddItem(2, DataBase.Instance.items[11], 1, DataBase.Instance.items[11].type);
-            Shop.Instance.AddItem(3, DataBase.Instance.items[12], 1, DataBase.Instance.items[12].type);
-            Shop.Instance.AddItem(4, DataBase.Instance.items[13], 1, DataBase.Instance.items[13].type);
-            Shop.Instance.AddItem(5, DataBase.Instance.items[32], 1, DataBase.Instance.items[32].type);
-            Shop.Instance.AddItem(6, DataBase.Instance.items[33], 1, DataBase.Instance.items[33].type);
-            Shop.Instance.AddItem(7, DataBase.Instance.items[34], 1, DataBase.Instance.items[34].type);
-            Shop.Instance.AddItem(8, DataBase.Instance.items[35], 1, DataBase.Instance.items[35].type);
-            Shop.Instance.AddItem(9, DataBase.Instance.items[36], 1, DataBase.Instance.items[36].type);
+            Shop.Instance.InitializeShield();
 
             GameManager.Instance.PauseGame();
         }
@@ -213,26 +188,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             stepPoint = transform.position;
             buyPanel.SetActive(true);
 
-            Buy.Instance.AddItem(0, DataBase.Instance.items[Inventory.Instance.items[5].id], Inventory.Instance.items[5].count, Inventory.Instance.items[5].type);
-            Buy.Instance.AddItem(1, DataBase.Instance.items[Inventory.Instance.items[6].id], Inventory.Instance.items[6].count, Inventory.Instance.items[6].type);
-            Buy.Instance.AddItem(2, DataBase.Instance.items[Inventory.Instance.items[7].id], Inventory.Instance.items[7].count, Inventory.Instance.items[7].type);
-            Buy.Instance.AddItem(3, DataBase.Instance.items[Inventory.Instance.items[8].id], Inventory.Instance.items[8].count, Inventory.Instance.items[8].type);
-            Buy.Instance.AddItem(4, DataBase.Instance.items[Inventory.Instance.items[9].id], Inventory.Instance.items[9].count, Inventory.Instance.items[9].type);
-            Buy.Instance.AddItem(5, DataBase.Instance.items[Inventory.Instance.items[10].id], Inventory.Instance.items[10].count, Inventory.Instance.items[10].type);
-            Buy.Instance.AddItem(6, DataBase.Instance.items[Inventory.Instance.items[11].id], Inventory.Instance.items[11].count, Inventory.Instance.items[11].type);
-            Buy.Instance.AddItem(7, DataBase.Instance.items[Inventory.Instance.items[12].id], Inventory.Instance.items[12].count, Inventory.Instance.items[12].type);
-            Buy.Instance.AddItem(8, DataBase.Instance.items[Inventory.Instance.items[13].id], Inventory.Instance.items[13].count, Inventory.Instance.items[13].type);
-            Buy.Instance.AddItem(9, DataBase.Instance.items[Inventory.Instance.items[14].id], Inventory.Instance.items[14].count, Inventory.Instance.items[14].type);
-            Buy.Instance.AddItem(10, DataBase.Instance.items[Inventory.Instance.items[15].id], Inventory.Instance.items[15].count, Inventory.Instance.items[15].type);
-            Buy.Instance.AddItem(11, DataBase.Instance.items[Inventory.Instance.items[16].id], Inventory.Instance.items[16].count, Inventory.Instance.items[16].type);
-            Buy.Instance.AddItem(12, DataBase.Instance.items[Inventory.Instance.items[17].id], Inventory.Instance.items[17].count, Inventory.Instance.items[17].type);
-            Buy.Instance.AddItem(13, DataBase.Instance.items[Inventory.Instance.items[18].id], Inventory.Instance.items[18].count, Inventory.Instance.items[18].type);
-            Buy.Instance.AddItem(14, DataBase.Instance.items[Inventory.Instance.items[19].id], Inventory.Instance.items[19].count, Inventory.Instance.items[19].type);
-            Buy.Instance.AddItem(15, DataBase.Instance.items[Inventory.Instance.items[20].id], Inventory.Instance.items[20].count, Inventory.Instance.items[20].type);
-            Buy.Instance.AddItem(16, DataBase.Instance.items[Inventory.Instance.items[21].id], Inventory.Instance.items[21].count, Inventory.Instance.items[21].type);
-            Buy.Instance.AddItem(17, DataBase.Instance.items[Inventory.Instance.items[22].id], Inventory.Instance.items[22].count, Inventory.Instance.items[22].type);
-            Buy.Instance.AddItem(18, DataBase.Instance.items[Inventory.Instance.items[23].id], Inventory.Instance.items[23].count, Inventory.Instance.items[23].type);
-            Buy.Instance.AddItem(19, DataBase.Instance.items[Inventory.Instance.items[24].id], Inventory.Instance.items[24].count, Inventory.Instance.items[24].type);
+            Buy.Instance.Initialize();
 
             GameManager.Instance.PauseGame();
         }
@@ -244,16 +200,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             shopPanel.SetActive(true);
 
             Shop.Instance.DeleteAllItems();
-            Shop.Instance.AddItem(0, DataBase.Instance.items[4], 1, DataBase.Instance.items[4].type);
-            Shop.Instance.AddItem(1, DataBase.Instance.items[5], 1, DataBase.Instance.items[5].type);
-            Shop.Instance.AddItem(2, DataBase.Instance.items[6], 1, DataBase.Instance.items[6].type);
-            Shop.Instance.AddItem(3, DataBase.Instance.items[7], 1, DataBase.Instance.items[7].type);
-            Shop.Instance.AddItem(4, DataBase.Instance.items[8], 1, DataBase.Instance.items[8].type);
-            Shop.Instance.AddItem(5, DataBase.Instance.items[27], 1, DataBase.Instance.items[27].type);
-            Shop.Instance.AddItem(6, DataBase.Instance.items[28], 1, DataBase.Instance.items[28].type);
-            Shop.Instance.AddItem(7, DataBase.Instance.items[29], 1, DataBase.Instance.items[29].type);
-            Shop.Instance.AddItem(8, DataBase.Instance.items[30], 1, DataBase.Instance.items[30].type);
-            Shop.Instance.AddItem(9, DataBase.Instance.items[31], 1, DataBase.Instance.items[31].type);
+            Shop.Instance.InitializeWeapon();
 
             GameManager.Instance.PauseGame();
         }
@@ -275,37 +222,60 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
             learnPanel.SetActive(true);
             int type = Random.Range(0, 15);
 
-            if (type == 0)
-                learnText.GetComponent<Text>().text = "Õ¿œ¿ƒ≈Õ»≈ ”¬≈À»◊»¬¿≈“ —»À” ”ƒ¿–¿";
-            if (type == 1)
-                learnText.GetComponent<Text>().text = "ÀŒ¬ Œ—“‹ ”¬≈À»◊»¬¿≈“ ÿ¿Õ— œ–ŒÃ¿’¿ œŒ ¬¿Ã";
-            if (type == 2)
-                learnText.GetComponent<Text>().text = "¬€ÕŒ—À»¬Œ—“‹ ”¬≈À»◊»¬¿≈“ Ã¿ —»Ã¿À‹ÕŒ≈ Œ◊ Œ «ƒŒ–Œ¬‹ﬂ » —€“Œ—“»";
-            if (type == 3)
-                learnText.GetComponent<Text>().text = "«¿Ÿ»“¿ ”Ã≈Õ‹ÿ¿≈“ ¬’ŒƒﬂŸ»… ”–ŒÕ œŒ ¬¿Ã";
-            if (type == 4)
-                learnText.GetComponent<Text>().text = "œ–ŒƒŒÀ∆»“≈À‹ÕŒ—“‹ ›‘‘≈ “¿ «≈À»… «¿¬»—»“ Œ“ ¬€ÕŒ—À»¬Œ—“»";
-            if (type == 5)
-                learnText.GetComponent<Text>().text = "œŒƒ«≈Ã≈À‹ﬂ Œ◊≈Õ‹ Œœ¿—Õ€≈, ¡”ƒ‹“≈ Œ—“Œ–Œ∆Õ€!!!";
-            if (type == 6)
-                learnText.GetComponent<Text>().text = "≈—À» ¬¿ÿ¿ ÿ ¿À¿ —€“Œ—“» ”œ¿ƒ≈“ ƒŒ Õ”Àﬂ, ¬€ ¡”ƒ≈“≈ œŒÀ”◊¿“‹ ”–ŒÕ  ¿∆ƒ€… ’Œƒ";
-            if (type == 7)
-                learnText.GetComponent<Text>().text = "—À≈ƒ»“≈ «¿ ¬¿ÿ»Ã» ÿ ¿À¿Ã» «ƒŒ–Œ¬‹ﬂ » —€“Œ—“»";
-            if (type == 8)
-                learnText.GetComponent<Text>().text = "¬—≈√ƒ¿ »Ã≈…“≈ «¿œ¿— ≈ƒ€";
-            if (type == 9)
-                learnText.GetComponent<Text>().text = "≈—À» ¬€ ¬€…ƒ≈“≈ »« »√–€, ¬¿ÿ œ–Œ√–≈—— —Œ’–¿Õ»“—ﬂ";
-            if (type == 10)
-                learnText.GetComponent<Text>().text = " ¿∆ƒŒ≈ œŒƒÕﬂ“»≈ ”–Œ¬Õﬂ ¡”ƒ≈“ ƒ¿¬¿“‹—ﬂ —ÀŒ∆Õ≈≈ —  ¿∆ƒ€Ã –¿«ŒÃ";
-            if (type == 11)
-                learnText.GetComponent<Text>().text = "¬€ Õ≈ —ÃŒ∆≈“≈ ¡–¿“‹ œ–≈ƒÃ≈“€, ≈—À» ¬¿ÿ »Õ¬≈Õ“¿–‹ ¡”ƒ≈“ «¿œŒÀÕ≈Õ";
-            if (type == 12)
-                learnText.GetComponent<Text>().text = "«¿œŒÃ»Õ¿…“≈ ›‘‘≈ “  ¿∆ƒŒ√Œ «≈À‹ﬂ";
-            if (type == 13)
-                learnText.GetComponent<Text>().text = "Õ≈ Œ“Œ–€≈ «≈À‹ﬂ ÃŒ√”“ ”¡»“‹ ¬¿—, ¡”ƒ‹“≈ Œ—“Œ–Œ∆Õ€!!!";
-            if (type == 14)
-                learnText.GetComponent<Text>().text = " ŒÀŒƒ≈÷ ¬Œ——“¿Õ¿¬À»¬¿≈“ ¬¿ÿ≈ «ƒŒ–Œ¬‹≈";
-
+            switch (type)
+            {
+                case 0:
+                    learnText.GetComponent<Text>().text = "–û–°–¢–û–†–û–ñ–ù–ï–ô –° –ó–ï–õ–¨–Ø–ú–ò, –ù–ï–ö–û–¢–û–†–´–ï –ò–ó –ù–ò–• –ú–û–ì–£–¢ –ù–ï–°–¢–ò –û–¢–†–ò–¶–ê–¢–ï–õ–¨–ù–´–ô –≠–§–§–ï–ö–¢";
+                    break;
+                case 1:
+                    learnText.GetComponent<Text>().text = "–ó–ê–©–ò–¢–ê –£–ú–ï–ù–¨–®–ê–ï–¢ –í–•–û–î–Ø–©–ò–ô –£–†–û–ù –ü–û –í–ê–ú";
+                    break;
+                case 2:
+                    learnText.GetComponent<Text>().text = "–ù–ê–ü–ê–î–ï–ù–ò–ï –£–í–ï–õ–ò–ß–ò–í–ê–ï–¢ –£–†–û–ù –ü–û –í–†–ê–ì–ê–ú";
+                    break;
+                case 3:
+                    learnText.GetComponent<Text>().text = "–õ–û–í–ö–û–°–¢–¨ –£–í–ï–õ–ò–ß–ò–í–ê–ï–¢ –®–ê–ù–° –ü–†–û–ú–ê–•–ê –ü–û –í–ê–ú";
+                    break;
+                case 4:
+                    learnText.GetComponent<Text>().text = "–í–´–ù–û–°–õ–ò–í–û–°–¢–¨ –£–í–ï–õ–ò–ß–ò–í–ê–ï–¢ –ö–û–õ–ò–ß–ï–°–¢–í–û –û–ß–ö–û–í –ó–î–û–†–û–í–¨–Ø –ò –°–´–¢–û–°–¢–ò";
+                    break;
+                case 5:
+                    learnText.GetComponent<Text>().text = "–í–´–ù–û–°–õ–ò–í–û–°–¢–¨ –¢–ê–ö–ñ–ï –£–í–ï–õ–ò–ß–ò–í–ê–ï–¢ –ü–†–û–î–û–õ–ñ–ò–¢–ï–õ–¨–ù–û–°–¢–¨ –î–ï–ô–°–¢–í–ò–Ø –ó–ï–õ–ò–ô";
+                    break;
+                case 6:
+                    learnText.GetComponent<Text>().text = "–ó–ï–õ–¨–ï –¢–ï–õ–ï–ü–û–†–¢–ê–¶–ò–ò –¢–ï–õ–ï–ü–û–†–¢–ò–†–£–ï–¢ –í–ê–° –í –°–õ–£–ß–ê–ô–ù–û–ï –ú–ï–°–¢–û –ù–ê –ö–ê–†–¢–ï";
+                    break;
+                case 7:
+                    learnText.GetComponent<Text>().text = "–õ–ê–í–ö–ê –°–ö–£–ü–©–ò–ö–ê –í–°–¢–†–ï–ß–ê–ï–¢–°–Ø –í–ï–°–¨–ú–ê –†–ï–î–ö–û";
+                    break;
+                case 8:
+                    learnText.GetComponent<Text>().text = "–ó–ï–õ–¨–ï –ù–ï–í–ò–î–ò–ú–û–°–¢–ò –î–ï–õ–ê–ï–¢ –í–ê–° –ù–ï–í–ò–î–ò–ú–´–ú –î–õ–Ø –í–†–ê–ì–û–í –ù–ê –ù–ï–ö–û–¢–û–†–û–ï –í–†–ï–ú–Ø";
+                    break;
+                case 9:
+                    learnText.GetComponent<Text>().text = "–ó–ï–õ–¨–ï –ù–ï–£–Ø–ó–í–ò–ú–û–°–¢–ò –î–ï–õ–ê–ï–¢ –í–ê–° –ù–ï–í–û–°–ü–†–ò–ò–ú–ß–ò–í–´–ú –ö –ê–¢–ê–ö–ê–ú –í–†–ê–ì–û–í";
+                    break;
+                case 10:
+                    learnText.GetComponent<Text>().text = "–û–°–¢–û–†–û–ñ–ù–ï–ô! –ü–û–î–ó–ï–ú–ï–õ–¨–Ø –ú–û–ì–£–¢ –ë–´–¢–¨ –û–ü–ê–°–ù–´";
+                    break;
+                case 11:
+                    learnText.GetComponent<Text>().text = "–ü–û–°–õ–ï 20 –£–†–û–í–ù–Ø –ò–ì–†–ê –ü–ï–†–ï–•–û–î–ò–¢ –í –ê–î–°–ö–ò–ô –†–ï–ñ–ò–ú";
+                    break;
+                case 12:
+                    learnText.GetComponent<Text>().text = "–°–õ–ï–î–ò–¢–ï –ó–ê –û–ß–ö–ê–ú–ò –°–´–¢–û–°–¢–ò!";
+                    break;
+                case 13:
+                    learnText.GetComponent<Text>().text = "–ï–°–õ–ò –í–´ –ü–û–ì–ò–ë–ù–ï–¢–ï, –¢–û –ò–ì–†–£ –ù–ï–õ–¨–ó–Ø –ë–£–î–ï–¢ –ü–†–û–î–û–õ–ñ–ò–¢–¨";
+                    break;
+                case 14:
+                    learnText.GetComponent<Text>().text = "–í–ï–°–¨ –í–ê–® –ü–†–û–ì–†–ï–°–° –°–û–•–†–ê–ù–ò–¢–°–Ø –ü–û–°–õ–ï –í–´–•–û–î–ê –ò–ó –ò–ì–†–´";
+                    break;
+                case 15:
+                    learnText.GetComponent<Text>().text = "–ù–ï–ö–û–¢–û–†–´–ï –í–†–ê–ì–ò –ú–û–ì–£–¢ –ê–¢–ê–ö–û–í–ê–¢–¨ –í–ê–° –ò–ó–î–ê–õ–ò";
+                    break;
+                default:
+                    break;
+            }
+                
             GameManager.Instance.PauseGame();
         }
 
@@ -579,7 +549,7 @@ public class Player : Singleton<Player>, IPointerDownHandler, IPointerUpHandler
 
     private (int a, int b) FindWave(int startX, int startY, int targetX, int targetY) 
     {
-        int x, y,step=0;
+        int x, y, step=0;
         int stepX = 0, stepY = 0;
         int[,] cMap = new int[Generator.Instance.MapColumns, Generator.Instance.MapRows];
 

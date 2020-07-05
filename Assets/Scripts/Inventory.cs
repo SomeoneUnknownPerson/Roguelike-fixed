@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine;
 using Rogue; 
 
 public class Inventory : Singleton<Inventory>
@@ -10,25 +9,18 @@ public class Inventory : Singleton<Inventory>
 	public List<ItemInventory> items = new List<ItemInventory>();
    
 	public GameObject gameObjShow;
-
     public GameObject PanelInventory;
     public GameObject InventoryMainObject;
+	public EventSystem es;
+
 	public int maxCount;
 
     public AudioClip deleteSound;
 
-    public Camera cam;
-	public EventSystem es;
-
 	public int currentID;
-	public ItemInventory currentItem;
-
-	public RectTransform movingObject;
-	public Vector3 offset;
-
     private bool deleteMode;
 
-	public void Start()
+	private void Start()
 	{
 		if(items.Count == 0)
 			addGraphics();
@@ -51,12 +43,6 @@ public class Inventory : Singleton<Inventory>
         UpdateInventory();
 	}
 
-	public void Update()
-	{
-		if(currentID != -1 && !GameManager.Instance.onPause)
-			MoveObject();
-	}
-
   	public void AddItem(int id, Item item, int count, DataBase.ItemType type)
     {
    		items[id].id = item.id;
@@ -71,7 +57,7 @@ public class Inventory : Singleton<Inventory>
             items[id].itemGameObj.GetComponentInChildren<Text>().text = "";
 	}
 
-    public void addGraphics()
+    private void addGraphics()
     {
    		for(int i = 0; i < maxCount; i++)
    		{
@@ -96,7 +82,7 @@ public class Inventory : Singleton<Inventory>
 		}
 	}
 
-	public void SelectObject()
+	private void SelectObject()
 	{
         if(currentID == -1 && !deleteMode)
       	{
@@ -236,13 +222,6 @@ public class Inventory : Singleton<Inventory>
             }		
    		}
 	}
-
-    public void MoveObject()
-    {
-   		Vector3 pos = Input.mousePosition + offset;
-   		pos.z = InventoryMainObject.GetComponent<RectTransform>().position.z;
-   		movingObject.position = cam.ScreenToWorldPoint(pos);
-    }
 
     public void LoadData(List<Save.PlayerInventorySaveData> save)
     {
